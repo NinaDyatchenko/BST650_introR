@@ -30,7 +30,7 @@ myAge * 30.44
 myAge / 12
 ```
 4. Copy and Paste MyAge into the console and press ENTER. What happens? Why?
-Console returened error "Error: object 'MyAge' not found". Because console does not write a code.
+Console returened error "Error: object 'MyAge' not found". Because R is case sencitive, it sees MyAge and myAge differently. myAge was defined in the code previously, but MyAge was not. Thus R gives the error. 
 
 ## Exercise set 2
 
@@ -55,10 +55,37 @@ wtBefore - wtAfter
    
 2. Create the following vectors using the rep() and seq() functions:
    a) the first non-negative integer powers of 2
+   
+```{r}
+
+
+```
    b) 1, 1.5, 2, 2.5, ..., 12
+   
+```{r}
+seq( from =1, to = 12 , by = 0.5)
+
+```
    c) 1, 8, 27, 64, ..., 1000
+   
+```{r}
+seq(from = 1, to = 10, by = 1)^3
+
+```
    d) 1, -1/2, 1/3, -1/4, ..., -1/100
+```{r}
+library(MASS)
+as.fractions(-(seq(from = -1, to = 1, by = 2)/seq(from = 1, to = 100, by = 1)))
+
+```
+   
+   
    e) 1, 0, 3, 0, 5, 0, 7, 0, ..., 0, 49
+   
+```{r}
+
+
+```
    f) 1, 3, 6, 10, 15, ..., 210 (Hint: ?cumsum)
    g) 1, 2, 2, 3, 3, 3, ..., 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 (Hint: ?rep)
 3. (ADVANCED) The jth term of the Taylor-MacLaurin series for the natural
