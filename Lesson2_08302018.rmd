@@ -1,0 +1,76 @@
+---
+title: "Statistical Distrib 08.30.2018"
+author: "Nina Dyatchenko"
+date: "August 30, 2018"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Descrete Random Variables
+We have a few common exampes of discrete random variables. Each distribution also has a corresponding implementation in 'R'.
+1. The Bernoulli distribution <https://en.wikipedia.org/wiki/Bernoulli_distribution>. 
+
+```{r}
+# Random Bernoulli - only one trial (flipping a coin, ourcomes 1 or 0)
+
+rbinom(n=1, size=1, prob= 0.5)
+
+# Weighted coin 
+rbinom(n=1, size=1, prob=0.75)
+```
+
+2. Binomial Distribution: 
+```{r}
+
+# Flip 10 coins and record the results
+rbinom(n=10, size=1, prob=0.5)
+
+# Flip 10 fair coind and record number of succeses
+rbinom(n=1, size=10, prob=0.5)
+
+```
+
+3. Poisson Destribusion. People kicks with by a horseanad killed. <https://en.wikipedia.org/wiki/Poisson_distribution>
+
+```{r}
+# How many horse kicks in each group of 10 soldiers? We expect (lambda) 2 kicks. So 2 is a mean/expected.
+rpois(n=10, lambda=2)
+
+# No whte horses are angry. Now 4 kicks is a mean.
+rpois(n=10, lambda=4)
+```
+
+## Moments of these Distrebutions. 
+The comment Momemts are the first and second Moment, from which we calculte the mean and variance respectively. 
+
+### Binomial
+```{r}
+# Random draw of 5 faiar coins
+xBinom <- rbinom(n=5, size=1, prob=0.5)
+xBinom
+
+# Mean
+mean(xBinom)
+
+# variance
+var(xBinom)
+
+# Random draw of 100 faiar coins
+xBinom2 <- rbinom(n=100, size=1, prob=0.5)
+xBinom2
+
+# Mean
+mean(xBinom2)
+
+
+# variance
+var(xBinom2)
+```
+
+
+
+## Continuous Random Variables
