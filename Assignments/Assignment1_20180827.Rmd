@@ -14,23 +14,29 @@ knitr::opts_chunk$set(echo = TRUE)
 
 1. Create an object called "myAge" that holds your age *in months*. Hint: the
    multiplication operator in R is "*".
+   
 ```{r}
 myAge <- 29 * 12 + 8
+myAge
 ```
 2. Using the object "myAge", approximate the number of days you've been alive.
    Use 30.44 days per month. Check this against your age in days on Wolfram
    Alpha. How many days off was your estimate?
+   
 ```{r}
 myAge * 30.44
 # from Wolfram Alpha, I am 10827 days old today.
 ```
 3. Using the object "myAge", find your decimal age. Hint: the division
    operator is "/".
+   
 ```{r}
 myAge / 12
 ```
 4. Copy and Paste MyAge into the console and press ENTER. What happens? Why?
-Console returened error "Error: object 'MyAge' not found". Because R is case sencitive, it sees MyAge and myAge differently. myAge was defined in the code previously, but MyAge was not. Thus R gives the error. 
+ 
+  Console returened error "Error: object 'MyAge' not found". Because R is case sencitive, it sees MyAge and myAge differently. myAge was defined in the code previously, but MyAge was not. Thus R gives the error. 
+
 
 ## Exercise set 2
 
@@ -39,6 +45,7 @@ Console returened error "Error: object 'MyAge' not found". Because R is case sen
    after were [78 72 78 79 105] and [67 65 79 70 93], respectively. Store
    these two vectors as "wtBefore" and "wtAfter", respectively. Find the total
    weight lost, the average weight lost, and the weight lost per person.
+   
 ```{r}
 wtBefore <- c(78, 72, 78, 79, 105)
 wtAfter <- c(67, 65, 79, 70, 93)
@@ -64,29 +71,28 @@ wtBefore - wtAfter
    
 ```{r}
 seq( from =1, to = 12 , by = 0.5)
-
 ```
    c) 1, 8, 27, 64, ..., 1000
    
 ```{r}
 seq(from = 1, to = 10, by = 1)^3
-
 ```
    d) 1, -1/2, 1/3, -1/4, ..., -1/100
+   
 ```{r}
 library(MASS)
 as.fractions(-(seq(from = -1, to = 1, by = 2)/seq(from = 1, to = 100, by = 1)))
-
 ```
-
 ```{r}
+# or
+
 -(seq(from = -1, to = 1, by = 2)/seq(from = 1, to = 100, by = 1))
+
 ```
    
    e) 1, 0, 3, 0, 5, 0, 7, 0, ..., 0, 49
    
 ```{r}
-
 
 ```
    f) 1, 3, 6, 10, 15, ..., 210 (Hint: ?cumsum)
@@ -97,9 +103,9 @@ cumsum(1:20)
    g) 1, 2, 2, 3, 3, 3, ..., 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 (Hint: ?rep)
    
 ```{r}
+x=1:10
 rep(x, times = c(1:10), length.out = NA, each = 1)
 ```
-   
    
 3. (ADVANCED) The jth term of the Taylor-MacLaurin series for the natural
    logarithm is
@@ -110,7 +116,9 @@ rep(x, times = c(1:10), length.out = NA, each = 1)
    0.25
 
 ```{r}
-
+x=0.25
+n=c(5, 10, 50, 100)
+(x^(n+1))/(1-x)
 
 ```
 
@@ -120,16 +128,61 @@ rep(x, times = c(1:10), length.out = NA, each = 1)
 
 1. Create a vector of the months of the year and store it in an object called
    "mons".
+   
+```{r}
+mons<- c(month.name)
+mons
+```
+
 2. You would like to discard the first three months, so you type "mons[-1:3]".
    What happened? Why should you type instead?
+   
+```{r}
+
+# Error in mons[-1:3] : only 0's may be mixed with negative subscripts. R doesn't allow to "knit" with the error
+mons[1:3]
+
+mons[4:12]
+
+```
 3. Find a method to use the "length()" function to find the last four entries
    of *any* atomic vector. Apply this to find the last four months of the
    year.
+   
+```{r}
+mons[length(mons)-(3:0)]
+```
 4. Logically subset the uppercase vector of English letters in the following
    ways:
    a) Type LETTERS and press ENTER. What is your guess to find the lower case
       letters?
+
+```{r}
+LETTERS
+
+
+letters
+
+```
+
    b) Create a vector of the first 12 upper-case English letters
+```{r}
+LETT<- c(LETTERS[1:12])
+LETT
+
+```
+   
    c) Create a vector of the 1st, 3rd, 5th, 7th, ..., 25th English letters
+   
+```{r}
+LETTnum<- c(LETTERS[seq(from = 1, to = 26, by = 2)])
+LETTnum
+
+```
    d) Create a vector of the consonants. (Hint: it may be easier to find the
       letters that are *not* one of the vowels)
+      
+```{r}
+
+```
+      
