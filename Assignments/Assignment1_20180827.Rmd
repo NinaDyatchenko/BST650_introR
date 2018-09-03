@@ -109,7 +109,7 @@ as.fractions(-(seq(from = -1, to = 1, by = 2)/seq(from = 1, to = 100, by = 1)))
    
 ```{r}
 
-seq(from =1, to= 2, by=1)
+rep(c(1, 0))*(c(1:49, by=2))
 
 ```
 
