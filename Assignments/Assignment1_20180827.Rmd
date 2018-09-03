@@ -109,6 +109,8 @@ as.fractions(-(seq(from = -1, to = 1, by = 2)/seq(from = 1, to = 100, by = 1)))
    
 ```{r}
 
+seq(from =1, to= 2, by=1)
+
 ```
 
    f) 1, 3, 6, 10, 15, ..., 210 (Hint: ?cumsum)
@@ -149,7 +151,7 @@ n=c(5, 10, 50, 100)
    "mons".
    
 ```{r}
-mons<- c(month.name)
+mons<- month.name
 mons
 ```
 
@@ -158,11 +160,13 @@ mons
    What happened? Why should you type instead?
    
 ```{r}
+# Error in mons[-1:3] : only 0's may be mixed with negative subscripts. R doesn't allow to #"knit" with the error
 
-# Error in mons[-1:3] : only 0's may be mixed with negative subscripts. R doesn't allow to "knit" with the error
 mons[1:3]
 
 mons[4:12]
+# or
+mons[-(1:3)]
 
 ```
 
