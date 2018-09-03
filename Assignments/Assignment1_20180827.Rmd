@@ -136,10 +136,32 @@ rep(x, times = c(1:10), length.out = NA, each = 1)
    0.25
 
 ```{r}
-x=0.25
-n=c(5, 10, 50, 100)
-(x^(n+1))/(1-x)
+x <- 0.25
+n <- c(5, 10, 50, 100)
 
+# n = 5
+est_n5 <- x ^ (1:n[1]) / (1:n[1])
+-sum(est_n5) # estimate at n = 5
+log(1-x)     # truth
+log(1-x) - (-sum(est_n5))  #residual
+
+# n = 10
+est_n10 <- x ^ (1:n[2]) / (1:n[2])
+-sum(est_n10) # estimate at n = 10
+log(1-x)     # truth
+log(1-x) - (-sum(est_n10))  #residual
+
+# n = 50
+est_n50 <- x ^ (1:n[3]) / (1:n[3])
+-sum(est_n50) # estimate at n = 50
+log(1-x)     # truth
+log(1-x) - (-sum(est_n50))  #residual
+
+# n = 100
+est_n100 <- x ^ (1:n[4]) / (1:n[4])
+-sum(est_n100) # estimate at n = 100
+log(1-x)     # truth
+log(1-x) - (-sum(est_n100))  #residual
 ```
 
 
@@ -212,7 +234,16 @@ LETTnum
       letters that are *not* one of the vowels)
       
 ```{r}
+vowels <- c("A", "E", "I", "O", "U")
+"A" %in% vowels      # test the "in" operator
+areVowels <- LETTERS %in% vowels #will give TRUE for vowles and FALSE for consonants.
+areVowels
 
+areConsonants <- !(LETTERS %in% vowels) # will give opposite of above.
+areConsonants
+
+LETTERS[!(LETTERS %in% vowels)] 
+LETTERS[areConsonants]
 ```
 
       
