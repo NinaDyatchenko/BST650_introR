@@ -148,11 +148,11 @@ Link for Poisson Distribution: <https://en.wikipedia.org/wiki/Poisson_distributi
 
 mean is just $\lambda$:
 \[
-lambda := 3 
+\lambda := 3 
 \]
 variance is also $\lambda$:
 \[
-lambda := 3 
+\lambda := 3 
 \]
 ```{r}
 xP_n5 <- rpois(n=5, 3)
@@ -251,6 +251,8 @@ with mean identically $0$ and variance $\nu / (\nu - 2)$. This and other distrib
 \]
 where $\mathbb{N}$ is the set of counting numbers and $!$ is the [factorial operator](https://en.wikipedia.org/wiki/Factorial) (the $\Gamma$ function is technically defined for all complex numbers with a positive real component, but that's a conversation for your mathematical statistics class). Repeat the process I applied to the Negative Binomial distribution, but with a population variance of 2. Generate samples of sizes 5, 15, 25, and 1000 from such a distribution, and calculate their sample means and variances. 
 
+Student's t Distribution link: <https://en.wikipedia.org/wiki/Student%27s_t-distribution>
+
 Variance:
 \[
 \nu / (\nu -2) = 2
@@ -259,7 +261,7 @@ Degrees of freedom:
 \[
 df = \nu = 4
 \]
-
+Density distribution formulain R:
 \[
 rt(n, df, ncp)
 \]
@@ -295,6 +297,44 @@ The probability density function for the $\chi ^ 2$ Distribution (also typeset a
 \]
 with mean $\nu$ and variance $2 \nu$. Repeat the process I applied to the Negative Binomial distribution, but with a population mean of 2 (and thus a variance of 4). Generate samples of sizes 5, 15, 25, and 1000 from such a distribution, and calculate their sample means and variances. 
 
+Chi Squared Distribution link: <https://en.wikipedia.org/wiki/Chi-squared_distribution>
+R code for density function: `rchisq(n, df, ncp = 0)`
+Mean
+\[
+\nu = 2
+\]
+Variance
+\[
+2\nu=4
+\]
+Degrees of freedom (\nu)
+\[
+\nu=2
+\]]
+
+```{r}
+
+xChi_n5<- rchisq(n=5, df=2, ncp=0)
+xChi_n5
+mean(xChi_n5) 
+var(xChi_n5)
+
+xChi_n15<- rchisq(n=15, df=2, ncp=0)
+xChi_n15
+mean(xChi_n15) 
+var(xChi_n15)
+
+xChi_n25<- rchisq(n=25, df=2, ncp=0)
+xChi_n25
+mean(xChi_n25) 
+var(xChi_n25)
+
+xChi_n1000<- rchisq(n=1000, df=2, ncp=0)
+xChi_n1000
+mean(xChi_n1000) 
+var(xChi_n1000)
+```
+
 
 ### $F$-Distribution
 The probability density function for the $F$-Distribution is
@@ -306,3 +346,58 @@ with mean $m / (m - 2)$ and variance
 \frac{2m ^ 2 (n + m - 2)}{n (m - 2) ^ 2 (m - 4)},\ m > 4.
 \]
 Repeat the process I applied to the Negative Binomial distribution, but with a population mean of 1.2 and variance of 0.4. Generate samples of sizes 5, 15, 25, and 1000 from such a distribution, and calculate their sample means and variances. 
+
+$F$ Distribution link: <https://en.wikipedia.org/wiki/F-distribution>
+
+Mean:
+\[
+m / (m-2) = 1.2
+\]
+Variance:
+\[
+\frac{2m ^ 2 (n + m - 2)}{n (m - 2) ^ 2 (m - 4)} = 0.4
+\] 
+R code for density function: rf(n, df1, df2, ncp)
+
+Degrees of freadom $df_2$ or $m$:
+\[
+m=12
+\]
+
+Degrees of freadom $df_1$ or $n$:
+
+\[
+\frac{2 * 12^ 2 (n + 12 - 2)}{n (12 - 2) ^ 2 (12 - 4)} = 0.4
+\]
+
+\[
+\frac{288 (n + 10)}{n * 800} = 0.4
+\]
+
+\[
+n= 90
+\]
+
+```{r}
+xFd_n5<- rf(n=5, df1=90, df2=12)
+xFd_n5
+mean(xFd_n5)
+var(xFd_n5)
+
+xFd_n15<- rf(n=15, df1=90, df2=12)
+xFd_n15
+mean(xFd_n15)
+var(xFd_n15)
+
+xFd_n25<- rf(n=25, df1=90, df2=12)
+xFd_n25
+mean(xFd_n25)
+var(xFd_n25)
+
+xFd_n1000<- rf(n=1000, df1=90, df2=12)
+xFd_n1000
+mean(xFd_n1000)
+var(xFd_n1000)
+
+```
+
