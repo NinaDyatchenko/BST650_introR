@@ -111,6 +111,31 @@ p=1-(1/3)=2/3
 ```{r}
 xBD_n5 <- rbinom(n=5, size=5, prob=2/3)
 xBD_n5
+mean(xBD_n5) #3.2
+var(xBD_n5) # 0.7
+
+xBD_n15 <- rbinom(n=15, size=5, prob=2/3)
+xBD_n15
+mean(xBD_n15) # 3.4
+var(xBD_n15) # 1.2
+
+xBD_n25 <- rbinom(n=25, size=5, prob=2/3)
+xBD_n25
+mean(xBD_n25) #3.360
+var(xBD_n25) # 1.157
+
+xBD_n1000 <- rbinom(n=1000, size=5, prob=2/3)
+xBD_n1000
+mean(xBD_n1000) # 3.361
+var(xBD_n1000) # 1.056
+
+xBD_n100000 <- rbinom(n=100000, size=5, prob=2/3)
+xBD_n100000
+mean(xBD_n100000) # 3.335
+var(xBD_n100000) # 1.109
+
+# Why my variance doe not go to 2 and mean doesnt go to 6?
+
 ```
 
 ### Poisson Distribution
@@ -120,7 +145,36 @@ Pois(x|\lambda) := \frac{\lambda ^ x e ^ {\lambda}}{x!},
 \]
 where the population mean and variance are both equal to $\lambda$. Repeat the process I applied to the Negative Binomial distribution, but with a population mean of 3 (and variance of 3). Generate samples of sizes 5, 15, 25, and 1000 from such a distribution, and calculate their sample means and variances. 
 
+# mean:
+\[
+lambda := 3 
+\]
+# variance:
+\[
+lambda := 3 
+\]
+```{r}
+xP_n5 <- rpois(n=5, 3)
+xP_n5
+mean(xP_n5) #3.2
+var(xP_n5) # 0.7
 
+xP_n15 <- rpois(n=15, 3)
+xP_n15
+mean(xP_n15) # 2.933
+var(xP_n15) # 2.924
+
+xP_n25 <- rpois(n=25, 3)
+xP_n25
+mean(xP_n25)
+var(xP_n25) 
+
+xP_n1000 <- rpois(n=1000, 3)
+xP_n1000
+mean(xP_n1000) 
+var(xP_n1000) 
+
+```
 </br>
 
 *******************************************************************************
