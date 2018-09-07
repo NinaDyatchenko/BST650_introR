@@ -134,7 +134,7 @@ xBD_n100000
 mean(xBD_n100000) # 3.335
 var(xBD_n100000) # 1.109
 
-# Why my variance doe not go to 2 and mean doesnt go to 6?
+# Why my variance does not go to 2 and mean doesn't go to 6?
 
 ```
 
@@ -144,12 +144,13 @@ The probability mass function for the Poisson Distribution is
 Pois(x|\lambda) := \frac{\lambda ^ x e ^ {\lambda}}{x!},
 \]
 where the population mean and variance are both equal to $\lambda$. Repeat the process I applied to the Negative Binomial distribution, but with a population mean of 3 (and variance of 3). Generate samples of sizes 5, 15, 25, and 1000 from such a distribution, and calculate their sample means and variances. 
+Link for Poisson Distribution: <https://en.wikipedia.org/wiki/Poisson_distribution>
 
-# mean:
+mean is just $\lambda$:
 \[
 lambda := 3 
 \]
-# variance:
+variance is also $\lambda$:
 \[
 lambda := 3 
 \]
@@ -175,6 +176,9 @@ mean(xP_n1000)
 var(xP_n1000) 
 
 ```
+
+Observation: with large sample size n, the mean and variance approaches population mean and variance.
+
 </br>
 
 *******************************************************************************
@@ -191,6 +195,47 @@ The probability density function for the Normal Distribution is
 N(x|\mu, \sigma) := \frac{1}{\sqrt{2 \pi \sigma ^ 2}} e ^ {-\left(\frac{(x - \mu) ^ 2}{2 \sigma ^ 2}\right)},
 \]
 with mean $\mu$ and variance $\sigma ^ 2$. Repeat the process I applied to the Negative Binomial distribution, but with a population mean of 2 and variance of 5. Generate samples of sizes 5, 15, 25, and 1000 from such a distribution, and calculate their sample means and variances. 
+Normal Distribution link <https://en.wikipedia.org/wiki/Normal_distribution>
+
+Population mean:
+
+\[
+\mu = 2
+\]
+
+Variance:
+\[
+\sigma^2 = 5
+\]
+]
+
+\[
+N(x|\mu, \sigma) := \frac{1}{\sqrt{2 \pi (5)}} e ^ {-\left(\frac{(x - 2)) ^ 2}{2 (5)}\right)},
+\]
+```{r}
+xNorm_n5 <- rnorm(n=5, mean=2, sd = 1)
+xNorm_n5
+mean(xNorm_n5) 
+var(xNorm_n5) 
+
+xNorm_n15 <- rnorm(n=15, mean=2, sd = 1)
+xNorm_n15
+mean(xNorm_n15) 
+var(xNorm_n15) 
+
+xNorm_n25 <- rnorm(n=25, mean=2, sd = 1)
+xNorm_n25
+mean(xNorm_n25) 
+var(xNorm_n25) 
+
+xNorm_n1000 <- rnorm(n=1000, mean=2, sd = 1)
+xNorm_n1000
+mean(xNorm_n1000) 
+var(xNorm_n1000)
+
+# will sd always be 1?
+
+```
 
 
 ### Student's $t$ Distribution
