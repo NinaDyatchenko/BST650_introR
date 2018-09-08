@@ -75,7 +75,7 @@ Now, we will increase the sample size from 5 to 15, 25, and 1000.
 ```{r increaseN}
 # Sample Size of 15
 xNB_n15 <- rnbinom(n = 15, size = 5, prob = 0.5)
-xNB_n15
+
 mean(xNB_n15)
 var(xNB_n15)
 
@@ -115,28 +115,29 @@ n=6/p=6*2/3 = 9
 \]
 ```{r}
 xBD_n5 <- rbinom(n=5, size=9, prob=2/3)
-xBD_n5
-mean(xBD_n5) #3.2
-var(xBD_n5) # 0.7
+
+mean(xBD_n5) 
+var(xBD_n5) 
 
 xBD_n15 <- rbinom(n=15, size=9, prob=2/3)
-xBD_n15
-mean(xBD_n15) # 3.4
-var(xBD_n15) # 1.2
+
+mean(xBD_n15) 
+var(xBD_n15) 
+
 
 xBD_n25 <- rbinom(n=25, size=9, prob=2/3)
-xBD_n25
-mean(xBD_n25) #3.360
-var(xBD_n25) # 1.157
+
+mean(xBD_n25) 
+var(xBD_n25) 
 
 xBD_n1000 <- rbinom(n=1000, size=9, prob=2/3)
-xBD_n1000
-mean(xBD_n1000) # 3.361
-var(xBD_n1000) # 1.056
+
+mean(xBD_n1000) 
+var(xBD_n1000) 
 
 
 ```
-Observation: larger the sample size represents popuations more precisely.
+Observation: larger the sample size represents popuation more precisely.
 
 ### Poisson Distribution
 The probability mass function for the Poisson Distribution is
@@ -146,7 +147,7 @@ Pois(x|\lambda) := \frac{\lambda ^ x e ^ {\lambda}}{x!},
 where the population mean and variance are both equal to $\lambda$. Repeat the process I applied to the Negative Binomial distribution, but with a population mean of 3 (and variance of 3). Generate samples of sizes 5, 15, 25, and 1000 from such a distribution, and calculate their sample means and variances. 
 Link for Poisson Distribution: <https://en.wikipedia.org/wiki/Poisson_distribution>
 
-mean is just $\lambda$:
+mean is  $\lambda$:
 \[
 \lambda := 3 
 \]
@@ -156,28 +157,28 @@ variance is also $\lambda$:
 \]
 ```{r}
 xP_n5 <- rpois(n=5, 3)
-xP_n5
-mean(xP_n5) #3.2
-var(xP_n5) # 0.7
+
+mean(xP_n5) 
+var(xP_n5) 
 
 xP_n15 <- rpois(n=15, 3)
-xP_n15
-mean(xP_n15) # 2.933
-var(xP_n15) # 2.924
+
+mean(xP_n15) 
+var(xP_n15) 
 
 xP_n25 <- rpois(n=25, 3)
-xP_n25
+
 mean(xP_n25)
 var(xP_n25) 
 
 xP_n1000 <- rpois(n=1000, 3)
-xP_n1000
+
 mean(xP_n1000) 
 var(xP_n1000) 
 
 ```
 
-Observation: with large sample size n, the mean and variance approaches population mean and variance.
+Observation: with large sample size n, the sample's mean and variance approaches population's mean and variance.
 
 </br>
 
@@ -208,31 +209,31 @@ Variance:
 \sigma^2 = 5
 \]
 
-Stansard deviation:
+Standard deviation:
 \[
-\mu = \sqrt{\mu} = \sqrt{5} = 2.2361
+\sigma = \sqrt{\sigma^2} = \sqrt{5} = 2.2361
 \]
 \[
-N(x|\mu, \sigma) := \frac{1}{\sqrt{2 \pi (5)}} e ^ {-\left(\frac{(x - 2)) ^ 2}{2 (5)}\right)},
+N(x|\mu, \sigma) := \frac{1}{\sqrt{2 \pi (5)}} e ^ {-\left(\frac{(x - 2)) ^ 2}{2 (5)}\right)}
 \]
 ```{r}
 xNorm_n5 <- rnorm(n=5, mean=2, sd = 2.2361)
-xNorm_n5
+
 mean(xNorm_n5) 
 var(xNorm_n5) 
 
 xNorm_n15 <- rnorm(n=15, mean=2, sd = 2.2361)
-xNorm_n15
+
 mean(xNorm_n15) 
 var(xNorm_n15) 
 
 xNorm_n25 <- rnorm(n=25, mean=2, sd = 2.2361)
-xNorm_n25
+
 mean(xNorm_n25) 
 var(xNorm_n25) 
 
 xNorm_n1000 <- rnorm(n=1000, mean=2, sd = 2.2361)
-xNorm_n1000
+
 mean(xNorm_n1000) 
 var(xNorm_n1000)
 
@@ -268,23 +269,23 @@ rt(n, df, ncp)
 
 ```{r}
 xrt_n5 <- rt(n=5, df=4)
-xrt_n5
+
 mean(xrt_n5) 
 var(xrt_n5)
 
 xrt_n15 <- rt(n=15, df=4)
-xrt_n15
+
 mean(xrt_n15) 
 var(xrt_n15)
 
 xrt_n25 <- rt(n=25, df=4)
-xrt_n25
+
 mean(xrt_n25) 
 var(xrt_n25)
 
 xrt_n1000 <- rt(n=1000, df=4)
-xrt_n1000
-mean(xrt_n1000) 
+
+mean(xrt_n1000)
 var(xrt_n1000)
 
 ```
@@ -307,30 +308,30 @@ Variance
 \[
 2\nu=4
 \]
-Degrees of freedom (\nu)
+Degrees of freedom ($\nu$)
 \[
 \nu=2
-\]]
+\]
 
 ```{r}
 
 xChi_n5<- rchisq(n=5, df=2, ncp=0)
-xChi_n5
+
 mean(xChi_n5) 
 var(xChi_n5)
 
 xChi_n15<- rchisq(n=15, df=2, ncp=0)
-xChi_n15
+
 mean(xChi_n15) 
 var(xChi_n15)
 
 xChi_n25<- rchisq(n=25, df=2, ncp=0)
-xChi_n25
+
 mean(xChi_n25) 
 var(xChi_n25)
 
 xChi_n1000<- rchisq(n=1000, df=2, ncp=0)
-xChi_n1000
+
 mean(xChi_n1000) 
 var(xChi_n1000)
 ```
@@ -357,7 +358,7 @@ Variance:
 \[
 \frac{2m ^ 2 (n + m - 2)}{n (m - 2) ^ 2 (m - 4)} = 0.4
 \] 
-R code for density function: rf(n, df1, df2, ncp)
+R code for density function: `rf(n, df1, df2, ncp)`
 
 Degrees of freadom $df_2$ or $m$:
 \[
@@ -380,22 +381,22 @@ n= 90
 
 ```{r}
 xFd_n5<- rf(n=5, df1=90, df2=12)
-xFd_n5
+
 mean(xFd_n5)
 var(xFd_n5)
 
 xFd_n15<- rf(n=15, df1=90, df2=12)
-xFd_n15
+
 mean(xFd_n15)
 var(xFd_n15)
 
 xFd_n25<- rf(n=25, df1=90, df2=12)
-xFd_n25
+
 mean(xFd_n25)
 var(xFd_n25)
 
 xFd_n1000<- rf(n=1000, df1=90, df2=12)
-xFd_n1000
+
 mean(xFd_n1000)
 var(xFd_n1000)
 
