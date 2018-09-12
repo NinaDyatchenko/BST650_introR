@@ -1,0 +1,232 @@
+---
+title: "R Assignment 4"
+author: "Nina Dyatchenko"
+date: "September 12th, 2018"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Assignment 4: Due Sunday, 16 September at 23:59PM
+*For help with Rmarkdown for reports, see this [white paper](http://www.stat.cmu.edu/~cshalizi/rmarkdown/#math-in-r-markdown) from Carnegie Mellon University's Department of Statistics and Data Science.*
+
+For each the seven statistical distributions we covered in the last assignment (Normal, Student's $t$, $\chi ^ 2$, $F$, Binomial, Negative Binomial, and Poisson), 
+
+1. Generate and store a random vector of 10,000 observations, using the same parameters as the last homework:
+    i. $N(\mu = 2, \sigma ^ 2 = 5 )$,
+    
+```{r}
+set.seed(1)
+xNorm_n10000 <- rnorm(n=10000, mean=2, sd = sqrt(5))
+```
+
+    ii. $t_{\nu = 4}$,
+```{r}
+set.seed(2)
+xrt_n10000 <- rt(n=10000, df=4)
+```
+
+    iii. $\chi^2_{\nu = 2}$,
+```{r}
+set.seed(3)
+xChi_n10000<- rchisq(n=10000, df=2, ncp=0)
+```
+
+    iv. $F_{n = 90,\ m = 12}$,
+```{r}
+set.seed(4)
+xFd_n10000<- rf(n=10000, df1=90, df2=12)
+```
+
+    v. $Bin(n = 9, p = 2/3)$,
+```{r}
+set.seed(5)
+xBD_n10000 <- rbinom(n=10000, size=9, prob=2/3)
+```
+
+    vi. $NBin(n = 5, p = 1/2)$, and
+```{r}
+set.seed(6)
+xNB_n10000 <- rnbinom(n = 10000, size = 5, prob = 0.5)
+```
+
+    vii. $Pois(\lambda = 3)$.
+```{r}
+set.seed(7)
+xP_n10000 <- rpois(n=10000, 3)
+```
+
+2. Subset the first $N = 6$ values from the vector, and of this subset
+    i. calculate the 5-Number Summary,
+
+6 number summary?
+
+    ii. plot the histogram of the subset, and
+    iii. plot the estimated density of this subset.
+
+Normal:
+```{r}
+NormSubs6<- xNorm_n10000[1:6]
+summary(NormSubs6)
+hist(NormSubs6)
+plot(density(NormSubs6))
+```
+
+Student's $t$:
+
+```{r}
+TSubs6<- xrt_n10000[1:6]
+summary(TSubs6)
+hist(TSubs6)
+plot(density(TSubs6))
+```
+
+$\chi ^ 2$
+```{r}
+ChiSubs6<- xChi_n10000[1:6]
+summary(ChiSubs6)
+hist(ChiSubs6)
+plot(density(ChiSubs6))
+```
+
+$F$-Distribution
+
+```{r}
+FSubs6<- xFd_n10000[1:6]
+summary(FSubs6)
+hist(FSubs6)
+plot(density(FSubs6))
+```
+
+Binomial
+
+```{r}
+BDSubs6<- xBD_n10000[1:6]
+summary(BDSubs6)
+hist(BDSubs6)
+plot(density(BDSubs6))
+```
+
+Negative binomial
+
+```{r}
+NegSubs6<- xNB_n10000[1:6]
+summary(NegSubs6)
+hist(NegSubs6)
+plot(density(NegSubs6))
+```
+
+Poisson
+
+```{r}
+PoisSubs6<- xP_n10000[1:6]
+summary(PoisSubs6)
+hist(PoisSubs6)
+plot(density(PoisSubs6))
+```
+
+
+3. Repeat Item 2 for the first $N =  10,\ 20,\ 30,\ \text{and}\ 50$ values from the random vector you generated in Item 1. Remark on the changing behaviour as the sample size increases. 
+
+Normal:
+```{r}
+NormSubs10<- xNorm_n10000[1:10]
+summary(NormSubs10)
+hist(NormSubs10)
+plot(density(NormSubs10))
+
+NormSubs20<- xNorm_n10000[1:20]
+summary(NormSubs20)
+hist(NormSubs20)
+plot(density(NormSubs20))
+
+NormSubs30<- xNorm_n10000[1:30]
+summary(NormSubs30)
+hist(NormSubs30)
+plot(density(NormSubs30))
+
+NormSubs50<- xNorm_n10000[1:50]
+summary(NormSubs50)
+hist(NormSubs50)
+plot(density(NormSubs50))
+```
+
+Student's $t$:
+
+```{r}
+TSubs10<- xrt_n10000[1:10]
+summary(TSubs10)
+hist(TSubs10)
+plot(density(TSubs10))
+var(TSubs10)
+
+TSubs20<- xrt_n10000[1:20]
+summary(TSubs20)
+hist(TSubs20)
+plot(density(TSubs20))
+var(TSubs20)
+
+
+TSubs30<- xrt_n10000[1:30]
+summary(TSubs30)
+hist(TSubs30)
+plot(density(TSubs30))
+var(TSubs30)
+
+
+TSubs50<- xrt_n10000[1:50]
+summary(TSubs50)
+hist(TSubs50)
+plot(density(TSubs50))
+var(TSubs50)
+```
+
+$\chi ^ 2$
+```{r}
+ChiSubs10<- xChi_n10000[1:10]
+summary(ChiSubs10)
+hist(ChiSubs10)
+plot(density(ChiSubs10))
+var(ChiSubs10)
+
+ChiSubs20<- xChi_n10000[1:20]
+summary(ChiSubs20)
+hist(ChiSubs20)
+plot(density(ChiSubs20))
+var(ChiSubs20)
+
+ChiSubs30<- xChi_n10000[1:30]
+summary(ChiSubs30)
+hist(ChiSubs30)
+plot(density(ChiSubs30))
+var(ChiSubs30)
+
+ChiSubs50<- xChi_n10000[1:50]
+summary(ChiSubs50)
+hist(ChiSubs50)
+plot(density(ChiSubs50))
+var(ChiSubs50)
+```
+
+
+4. Repeat Item 2 for the entire vector ($N = 10000$). For smaller values of $N$ from continuous distributions, which tool do you think gave a better representation of the full data: histogram or density plot? Did this change when you inspected the discrete distributions?
+
+Normal:
+```{r}
+summary(xNorm_n10000)
+hist(xNorm_n10000)
+plot(density(xNorm_n10000))
+var(xNorm_n10000)
+```
+
+Student's $t$:
+
+```{r}
+summary(xrt_n10000)
+hist(xrt_n10000)
+plot(density(xrt_n10000))
+```
+5. Contrast the 5-Number Summaries at each of the sample sizes (6, 10, 20, 30, 50, and 10000) for the skewed distributions vs. the symmetric distributions.
