@@ -61,11 +61,8 @@ xP_n10000 <- rpois(n=10000, 3)
 
 2. Subset the first $N = 6$ values from the vector, and of this subset
     i. calculate the 5-Number Summary,
-
-6 number summary?
-
     ii. plot the histogram of the subset, and
-    iii. plot the estimated density of this subset.
+    iii. plot the estimated density of this subset. (Density assumes as normal).
 
 Normal:
 ```{r}
@@ -84,7 +81,7 @@ hist(TSubs6)
 plot(density(TSubs6))
 ```
 
-$\chi ^ 2$
+$\chi ^ 2$ (Not normal)
 ```{r}
 ChiSubs6<- xChi_n10000[1:6]
 summary(ChiSubs6)
@@ -229,4 +226,32 @@ summary(xrt_n10000)
 hist(xrt_n10000)
 plot(density(xrt_n10000))
 ```
-5. Contrast the 5-Number Summaries at each of the sample sizes (6, 10, 20, 30, 50, and 10000) for the skewed distributions vs. the symmetric distributions.
+5. Contrast the 5-Number Summaries at each of the sample sizes (6, 10, 20, 30, 50, and 10000) for the skewed distributions (Negative binomial, Chi^2, F)vs. the symmetric distributions (Binomial, T, Normal).
+
+Normal:
+```{r}
+summary(NormSubs6)
+summary(NormSubs10)
+summary(NormSubs20)
+summary(NormSubs30)
+summary(NormSubs50)
+summary(xNorm_n10000)
+var(NormSubs6)
+var(NormSubs10)
+var(NormSubs30)
+var(NormSubs50)
+var(xNorm_n10000)
+```
+Binomial:```{r}
+summary(BDSubs6)
+summary(BDSubs10)
+summary(BDSubs20)
+summary(BDSubs30)
+summary(BDSubs50)
+summary(xBD_n10000)
+
+
+
+
+
+
