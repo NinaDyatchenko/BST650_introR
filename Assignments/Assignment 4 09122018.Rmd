@@ -180,32 +180,62 @@ plot(density(TSubs50))
 var(TSubs50)
 ```
 
-$\chi ^ 2$: as sample size increases, 
+$\chi ^ 2$: as sample size increases, the skeweness of the grapth is more accurtely defined.
 ```{r}
 ChiSubs10<- xChi_n10000[1:10]
 summary(ChiSubs10)
 hist(ChiSubs10)
 plot(density(ChiSubs10))
-var(ChiSubs10)
 
 ChiSubs20<- xChi_n10000[1:20]
 summary(ChiSubs20)
 hist(ChiSubs20)
 plot(density(ChiSubs20))
-var(ChiSubs20)
 
 ChiSubs30<- xChi_n10000[1:30]
 summary(ChiSubs30)
 hist(ChiSubs30)
 plot(density(ChiSubs30))
-var(ChiSubs30)
 
 ChiSubs50<- xChi_n10000[1:50]
 summary(ChiSubs50)
 hist(ChiSubs50)
 plot(density(ChiSubs50))
+
+var(ChiSubs10)
+var(ChiSubs20)
+var(ChiSubs30)
 var(ChiSubs50)
 ```
+$F$-Distribution: 
+
+```{r}
+FSubs10<- xFd_n10000[1:10]
+summary(FSubs10)
+hist(FSubs10)
+plot(density(FSubs10))
+
+FSubs20<- xFd_n10000[1:20]
+summary(FSubs20)
+hist(FSubs20)
+plot(density(FSubs20))
+
+FSubs30<- xFd_n10000[1:30]
+summary(FSubs30)
+hist(FSubs30)
+plot(density(FSubs30))
+
+FSubs50<- xFd_n10000[1:50]
+summary(FSubs50)
+hist(FSubs50)
+plot(density(FSubs50))
+
+var(FSubs10)
+var(FSubs20)
+var(FSubs30)
+var(FSubs50)
+```
+
 
 
 ### 4. Repeat Item 2 for the entire vector ($N = 10000$). For smaller values of $N$ from continuous distributions, which tool do you think gave a better representation of the full data: histogram or density plot? Did this change when you inspected the discrete distributions?
@@ -249,4 +279,12 @@ summary(BDSubs20)
 summary(BDSubs30)
 summary(BDSubs50)
 summary(xBD_n10000)
+
+
+F
+
+```{r}
+
+
+```
 
