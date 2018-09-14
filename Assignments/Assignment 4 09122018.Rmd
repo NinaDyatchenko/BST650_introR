@@ -2,7 +2,7 @@
 title: "R Assignment 4"
 author: "Nina Dyatchenko"
 date: "September 12th, 2018"
-output: word_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 For each the seven statistical distributions we covered in the last assignment (Normal, Student's $t$, $\chi ^ 2$, $F$, Binomial, Negative Binomial, and Poisson), 
 
-1. Generate and store a random vector of 10,000 observations, using the same parameters as the last homework:
+### 1. Generate and store a random vector of 10,000 observations, using the same parameters as the last homework:
     i. $N(\mu = 2, \sigma ^ 2 = 5 )$,
     
 ```{r}
@@ -59,7 +59,7 @@ set.seed(7)
 xP_n10000 <- rpois(n=10000, 3)
 ```
 
-2. Subset the first $N = 6$ values from the vector, and of this subset
+### 2. Subset the first $N = 6$ values from the vector, and of this subset
     i. calculate the 5-Number Summary,
     ii. plot the histogram of the subset, and
     iii. plot the estimated density of this subset. (Density assumes as normal).
@@ -126,9 +126,10 @@ plot(density(PoisSubs6))
 ```
 
 
-3. Repeat Item 2 for the first $N =  10,\ 20,\ 30,\ \text{and}\ 50$ values from the random vector you generated in Item 1. Remark on the changing behaviour as the sample size increases. 
+### 3. Repeat Item 2 for the first $N =  10,\ 20,\ 30,\ \text{and}\ 50$ values from the random vector you generated in Item 1. Remark on the changing behaviour as the sample size increases. 
 
-Normal:
+Normal: as sample size increases, Normal distribution approaches Gaussian shape centered at the mean ($\mu = 2$):
+
 ```{r}
 NormSubs10<- xNorm_n10000[1:10]
 summary(NormSubs10)
@@ -151,7 +152,7 @@ hist(NormSubs50)
 plot(density(NormSubs50))
 ```
 
-Student's $t$:
+Student's $t$: as sample size increases, the distribution shapes up as normal around mean ($\mu=0$):
 
 ```{r}
 TSubs10<- xrt_n10000[1:10]
@@ -166,13 +167,11 @@ hist(TSubs20)
 plot(density(TSubs20))
 var(TSubs20)
 
-
 TSubs30<- xrt_n10000[1:30]
 summary(TSubs30)
 hist(TSubs30)
 plot(density(TSubs30))
 var(TSubs30)
-
 
 TSubs50<- xrt_n10000[1:50]
 summary(TSubs50)
@@ -181,7 +180,7 @@ plot(density(TSubs50))
 var(TSubs50)
 ```
 
-$\chi ^ 2$
+$\chi ^ 2$: as sample size increases, 
 ```{r}
 ChiSubs10<- xChi_n10000[1:10]
 summary(ChiSubs10)
@@ -209,7 +208,7 @@ var(ChiSubs50)
 ```
 
 
-4. Repeat Item 2 for the entire vector ($N = 10000$). For smaller values of $N$ from continuous distributions, which tool do you think gave a better representation of the full data: histogram or density plot? Did this change when you inspected the discrete distributions?
+### 4. Repeat Item 2 for the entire vector ($N = 10000$). For smaller values of $N$ from continuous distributions, which tool do you think gave a better representation of the full data: histogram or density plot? Did this change when you inspected the discrete distributions?
 
 Normal:
 ```{r}
@@ -226,7 +225,8 @@ summary(xrt_n10000)
 hist(xrt_n10000)
 plot(density(xrt_n10000))
 ```
-5. Contrast the 5-Number Summaries at each of the sample sizes (6, 10, 20, 30, 50, and 10000) for the skewed distributions (Negative binomial, Chi^2, F)vs. the symmetric distributions (Binomial, T, Normal).
+
+### 5. Contrast the 5-Number Summaries at each of the sample sizes (6, 10, 20, 30, 50, and 10000) for the skewed distributions (Negative binomial, Chi^2, F)vs. the symmetric distributions (Binomial, t, Normal).
 
 Normal:
 ```{r}
@@ -249,9 +249,4 @@ summary(BDSubs20)
 summary(BDSubs30)
 summary(BDSubs50)
 summary(xBD_n10000)
-
-
-
-
-
 
