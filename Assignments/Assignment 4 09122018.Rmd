@@ -183,23 +183,23 @@ var(TSubs50)
 $\chi ^ 2$: as sample size increases, the skeweness of the grapth is more accurtely defined.
 ```{r}
 ChiSubs10<- xChi_n10000[1:10]
-summary(ChiSubs10)
-hist(ChiSubs10)
-plot(density(ChiSubs10))
-
 ChiSubs20<- xChi_n10000[1:20]
-summary(ChiSubs20)
-hist(ChiSubs20)
-plot(density(ChiSubs20))
-
 ChiSubs30<- xChi_n10000[1:30]
-summary(ChiSubs30)
-hist(ChiSubs30)
-plot(density(ChiSubs30))
-
 ChiSubs50<- xChi_n10000[1:50]
+
+summary(ChiSubs10)
+summary(ChiSubs20)
+summary(ChiSubs30)
 summary(ChiSubs50)
+
+hist(ChiSubs10)
+hist(ChiSubs20)
+hist(ChiSubs30)
 hist(ChiSubs50)
+
+plot(density(ChiSubs10))
+plot(density(ChiSubs20))
+plot(density(ChiSubs30))
 plot(density(ChiSubs50))
 
 var(ChiSubs10)
@@ -207,7 +207,7 @@ var(ChiSubs20)
 var(ChiSubs30)
 var(ChiSubs50)
 ```
-$F$-Distribution: 
+$F$-Distribution: as sample size increases, it is still difficult to recognize if it is a normal or skewed distribution.
 
 ```{r}
 FSubs10<- xFd_n10000[1:10]
@@ -235,12 +235,90 @@ var(FSubs20)
 var(FSubs30)
 var(FSubs50)
 ```
+Binomial: as sample size increases, the distribution becoming look normal.
 
+```{r}
+BDSubs10<- xBD_n10000[1:10]
+summary(BDSubs10)
+hist(BDSubs10)
+plot(density(BDSubs10))
+
+BDSubs20<- xBD_n10000[1:20]
+summary(BDSubs20)
+hist(BDSubs20)
+plot(density(BDSubs20))
+
+BDSubs30<- xBD_n10000[1:30]
+summary(BDSubs30)
+hist(BDSubs30)
+plot(density(BDSubs30))
+
+BDSubs50<- xBD_n10000[1:50]
+summary(BDSubs50)
+hist(BDSubs50)
+plot(density(BDSubs50))
+
+var(BDSubs10)
+var(BDSubs20)
+var(BDSubs30)
+var(BDSubs50)
+```
+Negative binomial: as sample soze increases, the plot becomes more skewed.
+
+```{r}
+NegSubs10<- xNB_n10000[1:10]
+NegSubs20<- xNB_n10000[1:20]
+NegSubs30<- xNB_n10000[1:30]
+NegSubs50<- xNB_n10000[1:50]
+
+summary(NegSubs10)
+summary(NegSubs20)
+summary(NegSubs30)
+summary(NegSubs50)
+
+hist(NegSubs10)
+hist(NegSubs20)
+hist(NegSubs30)
+hist(NegSubs50)
+
+plot(density(NegSubs10))
+plot(density(NegSubs20))
+plot(density(NegSubs30))
+plot(density(NegSubs50))
+```
+
+
+Poisson: as sample size increases, the distribution becomes clearely skewed.
+
+```{r}
+PoisSubs10<- xP_n10000[1:10]
+PoisSubs20<- xP_n10000[1:20]
+PoisSubs30<- xP_n10000[1:30]
+PoisSubs50<- xP_n10000[1:50]
+
+summary(PoisSubs10)
+summary(PoisSubs20)
+summary(PoisSubs30)
+summary(PoisSubs50)
+
+hist(PoisSubs10)
+hist(PoisSubs20)
+hist(PoisSubs30)
+hist(PoisSubs50)
+
+plot(density(PoisSubs10))
+plot(density(PoisSubs20))
+plot(density(PoisSubs30))
+plot(density(PoisSubs50))
+```
 
 
 ### 4. Repeat Item 2 for the entire vector ($N = 10000$). For smaller values of $N$ from continuous distributions, which tool do you think gave a better representation of the full data: histogram or density plot? Did this change when you inspected the discrete distributions?
 
-Normal:
+Histogram gives a better representation of a small sample size of continuous distributions. A histogram is best for small sample sizes of the discrete distrebutions.
+Density function grapth is a bad representation of a samall samples of distributions.
+
+Normal - continuous
 ```{r}
 summary(xNorm_n10000)
 hist(xNorm_n10000)
@@ -248,7 +326,7 @@ plot(density(xNorm_n10000))
 var(xNorm_n10000)
 ```
 
-Student's $t$:
+Student's $t$ continuous
 
 ```{r}
 summary(xrt_n10000)
@@ -256,9 +334,52 @@ hist(xrt_n10000)
 plot(density(xrt_n10000))
 ```
 
-### 5. Contrast the 5-Number Summaries at each of the sample sizes (6, 10, 20, 30, 50, and 10000) for the skewed distributions (Negative binomial, Chi^2, F)vs. the symmetric distributions (Binomial, t, Normal).
+$\chi ^ 2$ continuous skewed
+```{r}
+summary(xChi_n10000)
+hist(xChi_n10000)
+plot(density(xChi_n10000))
+```
 
-Normal:
+$F$-Distribution - continuous
+
+```{r}
+summary(xFd_n10000)
+hist(xFd_n10000)
+plot(density(xFd_n10000))
+```
+
+Binomial - discrete
+
+```{r}
+summary(xBD_n10000)
+hist(xBD_n10000)
+plot(density(xBD_n10000))
+```
+
+Negative binomial - discrete
+
+```{r}
+summary(xNB_n10000)
+hist(xNB_n10000)
+plot(density(xNB_n10000))
+```
+
+Poisson - discrete
+
+```{r}
+summary(xP_n10000)
+hist(xP_n10000)
+plot(density(xP_n10000))
+```
+
+### 5. Contrast the 5-Number Summaries at each of the sample sizes (6, 10, 20, 30, 50, and 10000) for the skewed distributions (Negative binomial, $Chi^2$, $F$, Poisson) vs. the symmetric distributions (Binomial, $t$, Normal).
+
+The summaries for Symmetric distributions explaine the distributions more accurately as sample size increases. The summaries of the Skewed distributions vary without a certain pattern when sample size increases.
+
+
+Normal - symmetric
+
 ```{r}
 summary(NormSubs6)
 summary(NormSubs10)
@@ -272,7 +393,27 @@ var(NormSubs30)
 var(NormSubs50)
 var(xNorm_n10000)
 ```
-Binomial:```{r}
+
+Student's $t$ - symmetric
+
+```{r}
+summary(TSubs6)
+summary(TSubs10)
+summary(TSubs20)
+summary(TSubs30)
+summary(TSubs50)
+summary(xrt_n10000)
+var(TSubs6)
+var(TSubs10)
+var(TSubs20)
+var(TSubs30)
+var(TSubs50)
+var(xrt_n10000)
+```
+
+Binomial-symmetric
+
+```{r}
 summary(BDSubs6)
 summary(BDSubs10)
 summary(BDSubs20)
@@ -280,11 +421,63 @@ summary(BDSubs30)
 summary(BDSubs50)
 summary(xBD_n10000)
 
-
-F
-
-```{r}
-
-
+var(BDSubs6)
+var(BDSubs10)
+var(BDSubs20)
+var(BDSubs30)
+var(BDSubs50)
+var(BDSubs6)
+var(xBD_n10000)
 ```
 
+$F$-Distribution - skewed
+
+```{r}
+summary(FSubs6)
+summary(FSubs10)
+summary(FSubs20)
+summary(FSubs30)
+summary(FSubs50)
+summary(xFd_n10000)
+var(FSubs6)
+var(FSubs10)
+var(FSubs20)
+var(FSubs30)
+var(FSubs50)
+var(xFd_n10000)
+```
+
+Negative binomial - skewed
+
+```{r}
+summary(NegSubs6)
+summary(NegSubs10)
+summary(NegSubs20)
+summary(NegSubs30)
+summary(NegSubs50)
+summary(xNB_n10000)
+var(NegSubs6)
+var(NegSubs10)
+var(NegSubs20)
+var(NegSubs30)
+var(NegSubs50)
+var(xNB_n10000)
+```
+
+Poisson - skewed
+
+```{r}
+summary(PoisSubs6)
+summary(PoisSubs10)
+summary(PoisSubs20)
+summary(PoisSubs30)
+summary(PoisSubs50)
+summary(xP_n10000)
+var(PoisSubs6)
+var(PoisSubs10)
+var(PoisSubs20)
+var(PoisSubs30)
+var(PoisSubs50)
+var(xP_n10000)
+
+```
