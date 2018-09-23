@@ -9,12 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ## Assignment 5: Due Sunday, 23 September at 23:59PM
 *For help with Rmarkdown for reports, see this [white paper](http://www.stat.cmu.edu/~cshalizi/rmarkdown/#math-in-r-markdown) from Carnegie Mellon University's Department of Statistics and Data Science.*
 
 **I'm giving you some additional material to read. This should help you with the exercises I've assigned below.**
-
 
 ### Read About Lists
 Read the following articles:
@@ -28,7 +26,6 @@ Based on these lessons, here are some helpful definitions:
 2. Subset a list by position or name and extract its *contents* with the `[[` function
 3. Subset a list by name and extract its *contents* with the `$` function
 3. Find the class of an object with the `class()` function.
-
 
 ### Examples
 I will create a simple list, then I will subset it in all manner of ways. This is a `list` of one element, the `integer` 3 stored with name `a`.
