@@ -1,0 +1,65 @@
+---
+title: "Assingment 6"
+author: "Nina Dyatchenko"
+date: "September 28, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Assignment 6: Due Sunday, 30 September at 23:59PM
+*For help with Rmarkdown for reports, see this [white paper](http://www.stat.cmu.edu/~cshalizi/rmarkdown/#math-in-r-markdown) from Carnegie Mellon University's Department of Statistics and Data Science.*
+
+### Part 1
+Finish the work you have left over from Assignment 5. Email me when you finish, so I can look at it. Please finish this by Tuesday evening.
+**Done**
+
+### Part 2
+Read [this article](https://www.r-bloggers.com/5-ways-to-subset-a-data-frame-in-r/) and execute the code in it. For the last example in this article (using the `dplyr` package), use the `tidyverse` package you just installed instead. The `filter()` and `select()` functions are the same. Include the code from this article and your output as the first section of your markdown report.
+
+```{r}
+### import education expenditure data set and assign column names
+education <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/robustbase/education.csv", stringsAsFactors = FALSE)
+colnames(education) <- c("X","State","Region","Urban.Population","Per.Capita.Income","Minor.Population","Education.Expenditures")
+#View(education)
+head(education)
+
+ed_exp1 <- education[c(10:21),c(2,6:7)] # extracts observations from Region 2 (raws from 10 to 21) and three variables: State (column 2), Minor.Population (column 6), and Education.Expenditures (C0lumn 7)
+ed_exp1
+
+ed_exp2 <- education[-c(1:9,22:50),-c(1,3:5)] # will give same results as ed_exp1 by ommitting raws and colums that we don't need (using negative vector)
+ed_exp2
+
+ed_exp3 <- education[which(education$Region == 2),names(education) %in% c("State","Minor.Population","Education.Expenditures")]
+# We retrieve the columns of the subset by using the %in% operator on the names of the education data frame.
+ed_exp3
+
+ed_exp4 <- subset(education, Region == 2, select = c("State","Minor.Population","Education.Expenditures"))
+# The subset() function return subsets of vectors, matrices or data frames which meet conditions. Takes 3 arguments: the data frame you want subsetted, the rows corresponding to the condition by which you want it subsetted, and the columns you want returned. 
+ed_exp4
+```
+
+For the last example in this article (using the `dplyr` package), use the `tidyverse` package you just installed instead. The `filter()` and `select()` functions are the same. Include the code from this article and your output as the first section of your markdown report.
+
+```{r}
+library(tidyverse)
+ed_exp5 <- select(filter(education, Region == 2),c(State,Minor.Population:Education.Expenditures))
+ed_exp5
+```
+
+
+### Part 3
+1. Create the `myClass` data frame we covered in class. When you create the data frame, make sure that your character **strings** are not changed to **factors** (look at `?data.frame` for the `stringsAsFactors` argument; also look at how the article does it). Include a row in the data frame for me, you, and your classmates. Here are the features to measure:
+    a. last name
+    b. first name
+    c. number of cups of coffee or tea per day, and
+    d. current neighbourhood
+2. For each of the five data-frame subsetting methods in the article above, subset
+    i. Your row
+    ii. the column of neighbourhoods
+    iii. your current neighbourhood
+    iv. your AND my current neighbourhood, as a data frame
+    v. the rows with people who drink coffee or tea
+    vi. the neighbourhoods of people who *do not* drink coffee or tea
