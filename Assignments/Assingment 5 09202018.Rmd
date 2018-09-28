@@ -101,7 +101,7 @@ As a complimentary example to the pepper shaker, think about this list as a trai
 
 
 ## Exercises
-1. Create a list with four elements:
+**1. Create a list with four elements:**
     a. the character string `"Normal"` to represent the distribution
     b. a named vector of the population parameters (f-n names to assign names)
     c. a vector of 15 samples from a normal distribution with mean 2 and variance 5
@@ -118,13 +118,13 @@ Normal_ls<- list(
 Normal_ls$hist<- hist(Normal_ls$sample) 
 ```
 
-2. Print the distribution name and parameters (at the same time), and plot the saved histogram.
+**2. Print the distribution name and parameters (at the same time), and plot the saved histogram.**
 
 ```{r}
 Normal_ls[c("DistName", "params")]
 hist(Normal_ls$sample)
 ```
-3. Print the summary and variance of this sample.
+**3. Print the summary and variance of this sample.**
 
 ```{r}
 summary(Normal_ls$sample)
@@ -132,31 +132,61 @@ var(Normal_ls$sample)
 ```
 
 
-4. Test the hypothesis that these observations came from the distribution specified. Store the $p$-value, test statistic, critical value, and decision (reject or fail to reject) as new elements of the list.
+**4. Test the hypothesis that these observations came from the distribution specified.** Store the $p$-value, test statistic, critical value, and decision (reject or fail to reject) as new elements of the list.
 Test if the sample mean is hypothesys test.
 
 Discrete probability distributions: Binomial, Negative binomial, and Poisson.
 Continuous probability distributions: Normal, Student's t, Chi-square, and F.
 
-H0:	The data follow a specified distribution.
-Ha:	The data do not follow the specified distribution.
+
+***Normal***
+
+H0:	Mean = 2
+Ha:	Mean is not 2
+
 ```{r}
+mean(Normal_ls$sample)
+var(Normal_ls$sample)
+ 
+# qt(p, df, ncp, lower.tail = TRUE, log.p = FALSE)
+
+qt(0.975, 14) # Critical Value (CV)
 
 
-mu <- 5
-sd <- 2
-n <- 15
-xbar <- 2
-z <- (xbar-mu)/(sd/sqrt(n))
-z
+#Test statistics:
+# t.test is 
+# t.test(x, y = NULL,
+#       alternative = c("two.sided", "less", "greater"),
+#       mu = 0, paired = FALSE, var.equal = FALSE,
+#       conf.level = 0.95, ...)
 
-#chisq.test(sample, simulate.p.value = TRUE, B = 15)
+t_Norm <- t.test(
+  Normal_ls$sample, 
+  alternative = "two.sided",
+  mu = 2)
 
+t_Norm # gives output about hypothesis and statistics
+  
+class(t_Norm)
+is.list(t_Norm) # is a list;
+t_Norm$statistic # statistics refers only to a t value, extracts t value from hypothesis test output
+abs(t_Norm$statistic) # absolute value of test statistics
+abs(t_Norm$statistic) > qt(0.975, 14) 
+
+t_Norm$p.value # how much we are wrong
+Normal_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_Norm$statistic)
+Normal_ls[["p-value"]]<- t_Norm$p.value
+Normal_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+Normal_ls[["Reject"]]<- abs(t_Norm$statistic) > qt(0.975, 14) # Fail to reject if false
+Normal_ls
 ```
+Absolute value of TS is less than critical value. And p-value is large comparing to CI so we fail to reject the H0 hypothesis. We don't have enough evidence to reject mean=2. It is possible that mean=2.
 
-5. Repeat this for the rest of the distributions we inspected in Assignment 4. Did you reject the null hypothesis for any of the distributions? If so, which ones. If so, why do you think you rejected the null hypothesis for these distributions? If not, why not?
 
-Student's $t$ - symmetric, Continuous.
+
+**5. Repeat this for the rest of the distributions we inspected in Assignment 4. ** Did you reject the null hypothesis for any of the distributions? If so, which ones. If so, why do you think you rejected the null hypothesis for these distributions? If not, why not?
+
+***Student's $t$ - symmetric, Continuous.***
 
 ```{r}
 Stud_ls<- list(
@@ -174,11 +204,33 @@ hist(Stud_ls$sample)
 summary(Stud_ls$sample)
 var(Stud_ls$sample)
 
-t.test(Stud_ls$sample)
+# H0: mean = 0
+# Ha: mean !=0
+
+t_Stud <- t.test(
+  Stud_ls$sample, 
+  alternative = "two.sided",
+  mu = 0)
+
+class(t_Stud)
+is.list(t_Stud) # true - is a list;
+
+t_Stud$statistic 
+abs(t_Stud$statistic) # absolute value of test statistics
+abs(t_Stud$statistic) > qt(0.975, 14) 
+t_Stud$p.value # how much we are wrong
+
+Stud_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_Stud$statistic)
+Stud_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+Stud_ls[["p-value"]]<- t_Stud$p.value
+Stud_ls[["Reject"]]<- abs(t_Stud$statistic) > qt(0.975, 14) # Fail to reject if false
+Stud_ls
+
 
 ```
+TS is less then CV and P-value is larger then alpha. Fail to reject the H0.
 
-Binomial - Symmetric, Discrete.
+***Binomial - Symmetric, Discrete.***
 
 ```{r}
 Binom_ls<- list(
@@ -197,10 +249,32 @@ summary(Binom_ls$sample)
 var(Binom_ls$sample)
 
 t.test(Binom_ls$sample)
-# Ho = 
-```
 
-$\chi ^ 2$ Continuous, Skewed
+# H0: mean = 6
+# Ha: mean !=6
+
+t_Binom <- t.test(
+  Binom_ls$sample, 
+  alternative = "two.sided",
+  mu = 6)
+
+class(t_Binom)
+is.list(t_Binom) # true - is a list;
+
+t_Binom$statistic 
+abs(t_Binom$statistic) # absolute value of test statistics
+abs(t_Binom$statistic) > qt(0.975, 14) 
+t_Binom$p.value # how much we are wrong
+
+Binom_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_Binom$statistic)
+Binom_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+Binom_ls[["p-value"]]<- t_Binom$p.value
+Binom_ls[["Reject"]]<- abs(t_Binom$statistic) > qt(0.975, 14) # Fail to reject if false
+Binom_ls
+```
+TS is smaller then CV and P-value is larger then alpha, then do not reject H0.
+
+***$\chi ^ 2$ Continuous, Skewed***
 
 ```{r}
 ChiSq_ls<- list(
@@ -217,9 +291,32 @@ hist(ChiSq_ls$sample)
 
 summary(ChiSq_ls$sample)
 var(ChiSq_ls$sample)
-```
 
-$F$-Distribution - Continuous, Skewed.
+# H0: mean = 2
+# Ha: mean !=2
+
+t_ChiSq <- t.test(
+  ChiSq_ls$sample, 
+  alternative = "two.sided",
+  mu = 2)
+
+class(t_ChiSq)
+is.list(t_ChiSq) # true - is a list;
+
+t_ChiSq$statistic 
+abs(t_ChiSq$statistic) # absolute value of test statistics
+abs(t_ChiSq$statistic) > qt(0.975, 14) 
+t_ChiSq$p.value # how much we are wrong
+
+ChiSq_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_ChiSq$statistic)
+ChiSq_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+ChiSq_ls[["p-value"]]<- t_ChiSq$p.value
+ChiSq_ls[["Reject"]]<- abs(t_ChiSq$statistic) > qt(0.975, 14) # Fail to reject if false
+ChiSq_ls
+```
+TS is larger then CV and p-calue is less then alpha, then reject the H0 mean=2.
+
+***$F$-Distribution - Continuous, Skewed.***
 
 ```{r}
 Fdist_ls<- list(
@@ -236,9 +333,73 @@ hist(Fdist_ls$sample)
 
 summary(Fdist_ls$sample)
 var(Fdist_ls$sample)
+
+# H0: mean = 6
+# Ha: mean !=6
+
+t_Binom <- t.test(
+  Binom_ls$sample, 
+  alternative = "two.sided",
+  mu = 6)
+
+class(t_Binom)
+is.list(t_Binom) # true - is a list;
+
+t_Binom$statistic 
+abs(t_Binom$statistic) # absolute value of test statistics
+abs(t_Binom$statistic) > qt(0.975, 14) 
+t_Binom$p.value # how much we are wrong
+
+Binom_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_Binom$statistic)
+Binom_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+Binom_ls[["p-value"]]<- t_Binom$p.value
+Binom_ls[["Reject"]]<- abs(t_Binom$statistic) > qt(0.975, 14) # Fail to reject if false
+Binom_ls
+```
+TS is smaller then CV and P-value is larger then alpha, then do not reject H0.
+
+***$\chi ^ 2$ Continuous, Skewed***
+
+```{r}
+ChiSq_ls<- list(
+  DistName ="Chi Square",
+  params = c(nu = 2),
+  sample = rchisq(n=15, df=2, ncp=0)
+  )
+
+ChiSq_ls$hist<- hist(ChiSq_ls$sample) 
+ChiSq_ls$hist
+
+ChiSq_ls[c("DistName", "params")]
+hist(ChiSq_ls$sample)
+
+summary(ChiSq_ls$sample)
+var(ChiSq_ls$sample)
+
+# H0: mean = 2
+# Ha: mean !=2
+
+t_ChiSq <- t.test(
+  ChiSq_ls$sample, 
+  alternative = "two.sided",
+  mu = 2)
+
+class(t_ChiSq)
+is.list(t_ChiSq) # true - is a list;
+
+t_ChiSq$statistic 
+abs(t_ChiSq$statistic) # absolute value of test statistics
+abs(t_ChiSq$statistic) > qt(0.975, 14) 
+t_ChiSq$p.value # how much we are wrong
+
+ChiSq_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_ChiSq$statistic)
+ChiSq_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+ChiSq_ls[["p-value"]]<- t_ChiSq$p.value
+ChiSq_ls[["Reject"]]<- abs(t_ChiSq$statistic) > qt(0.975, 14) # Fail to reject if false
+ChiSq_ls
 ```
 
-Negative binomial - Discrete, Skewed
+***Negative binomial - Discrete, Skewed***
 
 ```{r}
 NegBinom_ls<- list(
@@ -255,9 +416,34 @@ hist(NegBinom_ls$sample)
 
 summary(NegBinom_ls$sample)
 var(NegBinom_ls$sample)
-```
 
-Poisson - Discrete, Skewed
+mean(NegBinom_ls$sample)
+# H0: mean = 4.47
+# Ha: mean !=4.47
+
+t_NBinom <- t.test(
+  NegBinom_ls$sample, 
+  alternative = "two.sided",
+  mu = 4.47)
+
+class(t_NBinom)
+is.list(t_NBinom) # true - is a list;
+
+t_NBinom$statistic 
+abs(t_NBinom$statistic) # absolute value of test statistics
+abs(t_NBinom$statistic) > qt(0.975, 14) 
+t_NBinom$p.value # how much we are wrong
+
+NegBinom_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_NBinom$statistic)
+NegBinom_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+NegBinom_ls[["p-value"]]<- t_NBinom$p.value
+NegBinom_ls[["Reject"]]<- abs(t_NBinom$statistic) > qt(0.975, 14) # Fail to reject if false
+NegBinom_ls
+
+```
+TS is below CV and p-value is larger then alpha, then fail to reject the H0. 
+
+***Poisson - Discrete, Skewed***
 
 ```{r}
 Pois_ls<- list(
@@ -274,4 +460,31 @@ hist(Pois_ls$sample)
 
 summary(Pois_ls$sample)
 var(Pois_ls$sample)
+mean(Pois_ls$sample)
+
+# H0: mean = 3
+# Ha: mean !=3
+
+t_Pois <- t.test(
+  Pois_ls$sample, 
+  alternative = "two.sided",
+  mu = 3)
+
+class(t_Pois)
+is.list(t_Pois) # true - is a list;
+
+t_Pois$statistic 
+abs(t_Pois$statistic) # absolute value of test statistics
+abs(t_Pois$statistic) > qt(0.975, 14) 
+t_Pois$p.value # how much we are wrong
+
+Pois_ls[["Absolute value of Test Statistics (TS)"]]<- abs(t_Pois$statistic)
+Pois_ls[["Critical Value (CV)"]]<- qt(0.975, 14)
+Pois_ls[["p-value"]]<- t_Pois$p.value
+Pois_ls[["Reject"]]<- abs(t_Pois$statistic) > qt(0.975, 14) # Fail to reject if false
+Pois_ls
 ```
+TS is less then CV and p-value is larger then alpha, then fail to reject H0.
+
+
+  
