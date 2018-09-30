@@ -51,15 +51,53 @@ ed_exp5
 
 
 ### Part 3
-1. Create the `myClass` data frame we covered in class. When you create the data frame, make sure that your character **strings** are not changed to **factors** (look at `?data.frame` for the `stringsAsFactors` argument; also look at how the article does it). Include a row in the data frame for me, you, and your classmates. Here are the features to measure:
+**1. Create the `myClass` data frame we covered in class.** When you create the data frame, make sure that your character **strings** are not changed to **factors**. (look at `?data.frame` for the `stringsAsFactors` argument; also look at how the article does it). Include a row in the data frame for me, you, and your classmates. Here are the features to measure:
     a. last name
     b. first name
     c. number of cups of coffee or tea per day, and
     d. current neighbourhood
-2. For each of the five data-frame subsetting methods in the article above, subset
-    i. Your row
-    ii. the column of neighbourhoods
-    iii. your current neighbourhood
-    iv. your AND my current neighbourhood, as a data frame
-    v. the rows with people who drink coffee or tea
-    vi. the neighbourhoods of people who *do not* drink coffee or tea
+    
+```{r}
+myClass <- list(
+  LName = c("Odom", "Dyatchenko", "Ma", "Gmunder"),
+  FName = c("Gabriel", "Nina", "Ruixan", "Kristin"),
+  CofTeaCaps = c(0, 3, 2, 0),
+  Neighb = c("Pembroke Pines", "Miami Beach", "Modera Riverhouse", "Brickell"),
+ stringsAsFactors = FALSE
+) # do not change strings to factors
+
+head(myClass)
+
+```
+    
+    
+**2. For each of the five data-frame subsetting methods in the article above, subset**
+   
+   ***i. Your row***
+```{r}
+MyRaw1 <- myClass[(2), (2)]# extracts observations from Region 2 (raws from 10 to 21) and three variables: State (column 2), Minor.Population   #(column 6), and Education.Expenditures (Column 7)
+MyRaw1
+MyRaw2 <- myClass[-c(1,3,4), c(1:4)]
+```
+
+MyRaw2 <- [-c(1:9,22:50),-c(1,3:5)] # will give same results as ed_exp1 by ommitting raws and colums that we don't need (using negative vector)
+ed_exp2
+```{r}
+MyRAw3 <- myClass[which(myClass== 2), names(myClass) %in% c("LName","FName","CafTeaCaps", "Neighb")]
+myRaw3
+
+```
+# We retrieve the columns of the subset by using the %in% operator on the names of the education data frame.
+ed_exp3
+
+ed_exp4 <- subset(education, Region == 2, select = c("State","Minor.Population","Education.Expenditures"))
+
+ed_exp5 <- select(filter(education, Region == 2),c(State,Minor.Population:Education.Expenditures))
+
+
+
+   ***ii. the column of neighbourhoods***
+   ***iii. your current neighbourhood***
+    ***iv. your AND my current neighbourhood, as a data frame***
+    ***v. the rows with people who drink coffee or tea***
+    ***vi. the neighbourhoods of people who *do not* drink coffee or tea***
