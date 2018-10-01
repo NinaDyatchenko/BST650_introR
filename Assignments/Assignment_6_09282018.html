@@ -205,7 +205,7 @@ ed_exp3</code></pre>
 ## 20    NB              318                    268
 ## 21    KS              304                    337</code></pre>
 <pre class="r"><code>ed_exp4 &lt;- subset(education, Region == 2, select = c(&quot;State&quot;,&quot;Minor.Population&quot;,&quot;Education.Expenditures&quot;))
-# The subset() function return subsets of vectors, matrices or data frames which meet conditions. Takes 3 arguments: the data frame you want subsetted, the rows corresponding to the condition by which you want it subsetted, and the columns you want returned. 
+# The subset() function returns subsets of vectors, matrices or data frames which meet conditions. Takes 3 arguments: the data frame you want subsetted, the rows corresponding to the condition by which you want it subsetted, and the columns you want returned. 
 ed_exp4</code></pre>
 <pre><code>##    State Minor.Population Education.Expenditures
 ## 10    OH              324                    221
@@ -222,12 +222,12 @@ ed_exp4</code></pre>
 ## 21    KS              304                    337</code></pre>
 <p>For the last example in this article (using the <code>dplyr</code> package), use the <code>tidyverse</code> package you just installed instead. The <code>filter()</code> and <code>select()</code> functions are the same. Include the code from this article and your output as the first section of your markdown report.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages -------------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## -- Attaching packages ----------------------------------------------------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
 <pre><code>## v ggplot2 2.2.1     v purrr   0.2.4
 ## v tibble  1.4.2     v dplyr   0.7.6
 ## v tidyr   0.8.1     v stringr 1.3.1
 ## v readr   1.1.1     v forcats 0.3.0</code></pre>
-<pre><code>## -- Conflicts ----------------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts -------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>ed_exp5 &lt;- select(filter(education, Region == 2),c(State,Minor.Population:Education.Expenditures))
@@ -254,8 +254,8 @@ ed_exp5</code></pre>
   FName = c(&quot;Gabriel&quot;, &quot;Nina&quot;, &quot;Ruixan&quot;, &quot;Kristin&quot;),
   CofTeaCaps = c(0, 3, 2, 0),
   Neighb = c(&quot;Pembroke Pines&quot;, &quot;Miami Beach&quot;, &quot;Modera Riverhouse&quot;, &quot;Brickell&quot;),
-# do not change strings to factors
-stringsAsFactors = FALSE)</code></pre>
+
+stringsAsFactors = FALSE) # do not change strings to factors</code></pre>
 <p><strong>2. For each of the five data-frame subsetting methods in the article above, subset</strong></p>
 <p><strong><em>i. Your row</em></strong></p>
 <pre class="r"><code>myRaw1 &lt;- myClass[2, c(1:4)]
@@ -266,14 +266,150 @@ myRaw1</code></pre>
 myRaw2</code></pre>
 <pre><code>##        LName FName CofTeaCaps      Neighb
 ## 2 Dyatchenko  Nina          3 Miami Beach</code></pre>
-<pre class="r"><code>myRaw3 &lt;- myClass[which(myClass$LName== &quot;Dyatchenko&quot;), names(myClass) %in% c(&quot;LName&quot;,&quot;FName&quot;,&quot;CafTeaCaps&quot;, &quot;Neighb&quot;)]
+<pre class="r"><code>myRaw3 &lt;- myClass[which(myClass$LName== &quot;Dyatchenko&quot;), names(myClass) %in% c(&quot;LName&quot;,&quot;FName&quot;,&quot;CofTeaCaps&quot;, &quot;Neighb&quot;)]
 myRaw3</code></pre>
-<pre><code>##        LName FName      Neighb
-## 2 Dyatchenko  Nina Miami Beach</code></pre>
-<pre class="r"><code>ed_exp4 &lt;- subset(education, Region == 2, select = c(&quot;State&quot;,&quot;Minor.Population&quot;,&quot;Education.Expenditures&quot;))
-
-ed_exp5 &lt;- select(filter(education, Region == 2),c(State,Minor.Population:Education.Expenditures))</code></pre>
-<p><strong><em>ii. the column of neighbourhoods</em></strong> <strong><em>iii. your current neighbourhood</em></strong> <strong><em>iv. your AND my current neighbourhood, as a data frame</em></strong> <strong><em>v. the rows with people who drink coffee or tea</em></strong> <strong><em>vi. the neighbourhoods of people who </em>do not* drink coffee or tea</strong>*</p>
+<pre><code>##        LName FName CofTeaCaps      Neighb
+## 2 Dyatchenko  Nina          3 Miami Beach</code></pre>
+<pre class="r"><code>myRaw4 &lt;- subset(myClass, LName ==&quot;Dyatchenko&quot;, select = c(LName:Neighb)) # not each variable in quotes 
+myRaw4</code></pre>
+<pre><code>##        LName FName CofTeaCaps      Neighb
+## 2 Dyatchenko  Nina          3 Miami Beach</code></pre>
+<pre class="r"><code>myRaw5 &lt;- select(filter(myClass, LName == &quot;Dyatchenko&quot;), c(LName:Neighb)) # not each variable in quotes 
+myRaw5</code></pre>
+<pre><code>##        LName FName CofTeaCaps      Neighb
+## 1 Dyatchenko  Nina          3 Miami Beach</code></pre>
+<p><strong><em>ii. the column of neighbourhoods</em></strong></p>
+<pre class="r"><code>Neighb1 &lt;- myClass[, 4]
+Neighb1</code></pre>
+<pre><code>## [1] &quot;Pembroke Pines&quot;    &quot;Miami Beach&quot;       &quot;Modera Riverhouse&quot;
+## [4] &quot;Brickell&quot;</code></pre>
+<pre class="r"><code>Neighb2 &lt;- myClass[, -c(1:3)]
+Neighb2</code></pre>
+<pre><code>## [1] &quot;Pembroke Pines&quot;    &quot;Miami Beach&quot;       &quot;Modera Riverhouse&quot;
+## [4] &quot;Brickell&quot;</code></pre>
+<pre class="r"><code>Neighb3 &lt;- myClass[names(myClass) %in% c(&quot;Neighb&quot;)]
+Neighb3</code></pre>
+<pre><code>##              Neighb
+## 1    Pembroke Pines
+## 2       Miami Beach
+## 3 Modera Riverhouse
+## 4          Brickell</code></pre>
+<pre class="r"><code>Neighb4 &lt;- subset(myClass, select = c(Neighb)) # not each variable in quotes 
+Neighb4</code></pre>
+<pre><code>##              Neighb
+## 1    Pembroke Pines
+## 2       Miami Beach
+## 3 Modera Riverhouse
+## 4          Brickell</code></pre>
+<pre class="r"><code>Neighb5 &lt;- select(filter(myClass), c(Neighb)) # not each variable in quotes 
+Neighb5</code></pre>
+<pre><code>##              Neighb
+## 1    Pembroke Pines
+## 2       Miami Beach
+## 3 Modera Riverhouse
+## 4          Brickell</code></pre>
+<p><strong><em>iii. your current neighbourhood</em></strong></p>
+<pre class="r"><code>myNeighb1 &lt;- myClass[2, 4]
+myNeighb1</code></pre>
+<pre><code>## [1] &quot;Miami Beach&quot;</code></pre>
+<pre class="r"><code>myNeighb2 &lt;- myClass[-c(1, 3:4), -c(1:3)]
+myNeighb2</code></pre>
+<pre><code>## [1] &quot;Miami Beach&quot;</code></pre>
+<pre class="r"><code>myNeighb3 &lt;- myClass[which(myClass$LName== &quot;Dyatchenko&quot;), names(myClass) %in% c(&quot;Neighb&quot;)]
+myNeighb3</code></pre>
+<pre><code>## [1] &quot;Miami Beach&quot;</code></pre>
+<pre class="r"><code>myNeighb4 &lt;- subset(myClass, LName==&quot;Dyatchenko&quot;, select = c(Neighb))
+myNeighb4</code></pre>
+<pre><code>##        Neighb
+## 2 Miami Beach</code></pre>
+<pre class="r"><code>myNeighb5 &lt;- select(filter(myClass, LName== &quot;Dyatchenko&quot;), c(Neighb))
+myNeighb5</code></pre>
+<pre><code>##        Neighb
+## 1 Miami Beach</code></pre>
+<pre><code>***iv. your AND my current neighbourhood, as a data frame***</code></pre>
+<pre class="r"><code>TwoNeighb1 &lt;- myClass[1:2, 4]
+TwoNeighb1</code></pre>
+<pre><code>## [1] &quot;Pembroke Pines&quot; &quot;Miami Beach&quot;</code></pre>
+<pre class="r"><code>TwoNeighb2 &lt;- myClass[-c(3:4), -c(1:3)]
+TwoNeighb2</code></pre>
+<pre><code>## [1] &quot;Pembroke Pines&quot; &quot;Miami Beach&quot;</code></pre>
+<pre class="r"><code>TwoNeighb3 &lt;- myClass[which(myClass$LName %in% c(&quot;Odom&quot;, &quot;Dyatchenko&quot;)), names(myClass) %in% c(&quot;Neighb&quot;)]
+TwoNeighb3</code></pre>
+<pre><code>## [1] &quot;Pembroke Pines&quot; &quot;Miami Beach&quot;</code></pre>
+<pre class="r"><code>TwoNeighb4 &lt;- subset(myClass, LName %in% c(&quot;Odom&quot;, &quot;Dyatchenko&quot;), select = c(Neighb))
+TwoNeighb4</code></pre>
+<pre><code>##           Neighb
+## 1 Pembroke Pines
+## 2    Miami Beach</code></pre>
+<pre class="r"><code>TwoNeighb5 &lt;- select(filter(myClass, LName %in% c(&quot;Odom&quot;, &quot;Dyatchenko&quot;)), c(Neighb))
+TwoNeighb5</code></pre>
+<pre><code>##           Neighb
+## 1 Pembroke Pines
+## 2    Miami Beach</code></pre>
+<pre><code>***v. the rows with people who drink coffee or tea***</code></pre>
+<pre class="r"><code>head(myClass)</code></pre>
+<pre><code>##        LName   FName CofTeaCaps            Neighb
+## 1       Odom Gabriel          0    Pembroke Pines
+## 2 Dyatchenko    Nina          3       Miami Beach
+## 3         Ma  Ruixan          2 Modera Riverhouse
+## 4    Gmunder Kristin          0          Brickell</code></pre>
+<pre class="r"><code>Drink1 &lt;- myClass[2:3, 1:4]
+Drink1</code></pre>
+<pre><code>##        LName  FName CofTeaCaps            Neighb
+## 2 Dyatchenko   Nina          3       Miami Beach
+## 3         Ma Ruixan          2 Modera Riverhouse</code></pre>
+<pre class="r"><code>Drink2 &lt;- myClass[-c(1,4), ]
+Drink2</code></pre>
+<pre><code>##        LName  FName CofTeaCaps            Neighb
+## 2 Dyatchenko   Nina          3       Miami Beach
+## 3         Ma Ruixan          2 Modera Riverhouse</code></pre>
+<pre class="r"><code>Drink3 &lt;- myClass[which(myClass$LName %in% c(&quot;Dyatchenko&quot;, &quot;Ma&quot;)), names(myClass) %in% c(&quot;LName&quot;,&quot;FName&quot;,&quot;CofTeaCaps&quot;, &quot;Neighb&quot;)]
+Drink3</code></pre>
+<pre><code>##        LName  FName CofTeaCaps            Neighb
+## 2 Dyatchenko   Nina          3       Miami Beach
+## 3         Ma Ruixan          2 Modera Riverhouse</code></pre>
+<pre class="r"><code>Drink4 &lt;- subset(myClass, LName %in% c(&quot;Dyatchenko&quot;, &quot;Ma&quot;), select = c(1:4)) # c(1:4) also worked
+Drink4</code></pre>
+<pre><code>##        LName  FName CofTeaCaps            Neighb
+## 2 Dyatchenko   Nina          3       Miami Beach
+## 3         Ma Ruixan          2 Modera Riverhouse</code></pre>
+<pre class="r"><code>Drink5 &lt;- select(filter(myClass, LName %in% c(&quot;Dyatchenko&quot;, &quot;Ma&quot;)), c(1:4))
+Drink5</code></pre>
+<pre><code>##        LName  FName CofTeaCaps            Neighb
+## 1 Dyatchenko   Nina          3       Miami Beach
+## 2         Ma Ruixan          2 Modera Riverhouse</code></pre>
+<pre><code>***vi. the neighbourhoods of people who *do not* drink coffee or tea***</code></pre>
+<pre class="r"><code>head(myClass)</code></pre>
+<pre><code>##        LName   FName CofTeaCaps            Neighb
+## 1       Odom Gabriel          0    Pembroke Pines
+## 2 Dyatchenko    Nina          3       Miami Beach
+## 3         Ma  Ruixan          2 Modera Riverhouse
+## 4    Gmunder Kristin          0          Brickell</code></pre>
+<pre class="r"><code>NoDrink1 &lt;- myClass[c(1,4), 1:4]
+NoDrink1</code></pre>
+<pre><code>##     LName   FName CofTeaCaps         Neighb
+## 1    Odom Gabriel          0 Pembroke Pines
+## 4 Gmunder Kristin          0       Brickell</code></pre>
+<pre class="r"><code>NoDrink2 &lt;- myClass[-c(2:3), ]
+NoDrink2</code></pre>
+<pre><code>##     LName   FName CofTeaCaps         Neighb
+## 1    Odom Gabriel          0 Pembroke Pines
+## 4 Gmunder Kristin          0       Brickell</code></pre>
+<pre class="r"><code>NoDrink3 &lt;- myClass[which(myClass$LName %in% c(&quot;Odom&quot;, &quot;Gmunder&quot;)), names(myClass) %in% c(&quot;LName&quot;,&quot;FName&quot;,&quot;CofTeaCaps&quot;, &quot;Neighb&quot;)]
+NoDrink3</code></pre>
+<pre><code>##     LName   FName CofTeaCaps         Neighb
+## 1    Odom Gabriel          0 Pembroke Pines
+## 4 Gmunder Kristin          0       Brickell</code></pre>
+<pre class="r"><code>NoDrink4 &lt;- subset(myClass, LName %in% c(&quot;Odom&quot;, &quot;Gmunder&quot;), select = c(1:4)) # c(1:4) also worked
+NoDrink4</code></pre>
+<pre><code>##     LName   FName CofTeaCaps         Neighb
+## 1    Odom Gabriel          0 Pembroke Pines
+## 4 Gmunder Kristin          0       Brickell</code></pre>
+<pre class="r"><code>NoDrink5 &lt;- select(filter(myClass, LName %in% c(&quot;Odom&quot;, &quot;Gmunder&quot;)), c(1:4))
+NoDrink5</code></pre>
+<pre><code>##     LName   FName CofTeaCaps         Neighb
+## 1    Odom Gabriel          0 Pembroke Pines
+## 2 Gmunder Kristin          0       Brickell</code></pre>
 </div>
 </div>
 
